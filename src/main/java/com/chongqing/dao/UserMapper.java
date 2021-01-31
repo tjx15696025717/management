@@ -1,13 +1,33 @@
 package com.chongqing.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+import com.chongqing.domain.User;
+import com.chongqing.domain.UserExample;
+import java.util.List;
 
-/**
- * @program: management
- * @author: 一树
- * @data: 2021/1/31 13:28
- */
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 @Mapper
-public class UserMapper {
+public interface UserMapper {
+    int countByExample(UserExample example);
+
+    int deleteByExample(UserExample example);
+
+    int deleteByPrimaryKey(Long userId);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    List<User> selectByExample(UserExample example);
+
+    User selectByPrimaryKey(Long userId);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

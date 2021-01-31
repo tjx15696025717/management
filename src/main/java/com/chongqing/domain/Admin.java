@@ -1,25 +1,25 @@
 package com.chongqing.domain;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    private Long userId;
+public class Admin {
 
-    private Long houseId;
+    @NonNull
+    private Long id;
 
-    private String mobile;
+    private String name;
 
     private String password;
 
-    private String photo;
+    private String status;
 
-    private String sex;
-
-    private String qq;
 
 }
