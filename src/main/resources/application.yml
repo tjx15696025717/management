@@ -6,6 +6,15 @@ spring:
     url: jdbc:mysql://zjw.life:3310/management?serverTimezone=UTC&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  # 热部署
+  devtools:
+    livereload:
+      enabled: true
+
+  # thymeleaf
+  thymeleaf:
+    prefix: classpath:/views/
+    suffix: .html
 
 # mybatis 配置
 mybatis:
@@ -13,4 +22,3 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*Mapper.xml
 
- 

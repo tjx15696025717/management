@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ManagementApplication {
 
 	public static void main(String[] args) {
-		System.out.println("this is login0");
+
 		SpringApplication.run(ManagementApplication.class, args);
 	}
 

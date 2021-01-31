@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>登陆</title>
-    <link rel="stylesheet" type="text/css" href="login.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/login.css"/>
 </head>
 <body>
 
@@ -12,14 +12,14 @@
     <br>
     <h1>登陆系统</h1>
     <br>
-    <form action="" method="post">
+    <form action="http://127.0.0.1:8080/doLogin" method="post">
         <p>
-            账户<input type="text" name="" id="username" value="请输入用户名"
+            账户<input type="text" name="username" value="请输入用户名"
                      onfocus="
-				    if(this.value == '请输入用户名')this.value=''
+				    if(this.value === '请输入用户名')this.value=''
 				"
                      onblur="
-					if(this.value == '')this.value = '请输入用户名'
+					if(this.value === '')this.value = '请输入用户名'
 				"
         />
         </p>
