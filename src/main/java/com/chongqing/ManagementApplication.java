@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.chongqing.domain")
+@MapperScan(basePackages = "com.chongqing.dao")
 public class ManagementApplication {
 
 	public static void main(String[] args) {
