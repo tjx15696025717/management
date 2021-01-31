@@ -1,272 +1,147 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.mapper.ManagementMapper" >
-  <resultMap id="BaseResultMap" type="com.chongqing.domain.Management" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="house_id" property="houseId" jdbcType="BIGINT" />
-    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="photo" property="photo" jdbcType="VARCHAR" />
-    <result column="qq" property="qq" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="CHAR" />
-    <result column="info" property="info" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chongqing.dao.ManagementMapper">
+  <resultMap id="BaseResultMap" type="com.chongqing.domain.Management">
+    <!--@mbg.generated-->
+    <!--@Table management-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="house_id" jdbcType="BIGINT" property="houseId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="sex" jdbcType="OTHER" property="sex" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, house_id, mobile, `name`, `password`, photo, qq, sex, info
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    id, house_id, mobile, name, password, photo, qq, sex, info
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chongqing.domain.ManagementExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from management
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from management
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
     delete from management
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.chongqing.domain.ManagementExample" >
-    delete from management
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.chongqing.domain.Management" >
+  <insert id="insert" parameterType="com.chongqing.domain.Management">
+    <!--@mbg.generated-->
     insert into management (id, house_id, mobile, 
-      name, password, photo, 
+      `name`, `password`, photo, 
       qq, sex, info)
     values (#{id,jdbcType=BIGINT}, #{houseId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
-      #{qq,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{info,jdbcType=VARCHAR})
+      #{qq,jdbcType=VARCHAR}, #{sex,jdbcType=OTHER}, #{info,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.chongqing.domain.Management" >
+  <insert id="insertSelective" parameterType="com.chongqing.domain.Management">
+    <!--@mbg.generated-->
     insert into management
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="houseId != null" >
+      <if test="houseId != null">
         house_id,
       </if>
-      <if test="mobile != null" >
+      <if test="mobile != null">
         mobile,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="name != null">
+        `name`,
       </if>
-      <if test="password != null" >
-        password,
+      <if test="password != null">
+        `password`,
       </if>
-      <if test="photo != null" >
+      <if test="photo != null">
         photo,
       </if>
-      <if test="qq != null" >
+      <if test="qq != null">
         qq,
       </if>
-      <if test="sex != null" >
+      <if test="sex != null">
         sex,
       </if>
-      <if test="info != null" >
+      <if test="info != null">
         info,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="houseId != null" >
+      <if test="houseId != null">
         #{houseId,jdbcType=BIGINT},
       </if>
-      <if test="mobile != null" >
+      <if test="mobile != null">
         #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null" >
+      <if test="photo != null">
         #{photo,jdbcType=VARCHAR},
       </if>
-      <if test="qq != null" >
+      <if test="qq != null">
         #{qq,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=CHAR},
+      <if test="sex != null">
+        #{sex,jdbcType=OTHER},
       </if>
-      <if test="info != null" >
+      <if test="info != null">
         #{info,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.chongqing.domain.ManagementExample" resultType="java.lang.Integer" >
-    select count(*) from management
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.chongqing.domain.Management">
+    <!--@mbg.generated-->
     update management
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.houseId != null" >
-        house_id = #{record.houseId,jdbcType=BIGINT},
-      </if>
-      <if test="record.mobile != null" >
-        mobile = #{record.mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null" >
-        password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.photo != null" >
-        photo = #{record.photo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.qq != null" >
-        qq = #{record.qq,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=CHAR},
-      </if>
-      <if test="record.info != null" >
-        info = #{record.info,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update management
-    set id = #{record.id,jdbcType=BIGINT},
-      house_id = #{record.houseId,jdbcType=BIGINT},
-      mobile = #{record.mobile,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      qq = #{record.qq,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=CHAR},
-      info = #{record.info,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chongqing.domain.Management" >
-    update management
-    <set >
-      <if test="houseId != null" >
+    <set>
+      <if test="houseId != null">
         house_id = #{houseId,jdbcType=BIGINT},
       </if>
-      <if test="mobile != null" >
+      <if test="mobile != null">
         mobile = #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null" >
+      <if test="photo != null">
         photo = #{photo,jdbcType=VARCHAR},
       </if>
-      <if test="qq != null" >
+      <if test="qq != null">
         qq = #{qq,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=CHAR},
+      <if test="sex != null">
+        sex = #{sex,jdbcType=OTHER},
       </if>
-      <if test="info != null" >
+      <if test="info != null">
         info = #{info,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chongqing.domain.Management" >
+  <update id="updateByPrimaryKey" parameterType="com.chongqing.domain.Management">
+    <!--@mbg.generated-->
     update management
     set house_id = #{houseId,jdbcType=BIGINT},
       mobile = #{mobile,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
       qq = #{qq,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=CHAR},
+      sex = #{sex,jdbcType=OTHER},
       info = #{info,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

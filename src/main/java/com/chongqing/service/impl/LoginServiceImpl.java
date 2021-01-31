@@ -1,17 +1,7 @@
 package com.chongqing.service.impl;
 
-import com.chongqing.dao.AdminMapper;
-import com.chongqing.dao.HouseMapper;
-import com.chongqing.dao.ManagementMapper;
-import com.chongqing.dao.UserMapper;
-import com.chongqing.domain.Admin;
-import com.chongqing.domain.AdminExample;
-import com.chongqing.domain.User;
 import com.chongqing.service.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @program: management

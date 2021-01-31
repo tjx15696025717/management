@@ -1,9 +1,5 @@
 package com.chongqing.service;
 
-import com.chongqing.domain.Admin;
-import com.chongqing.domain.Management;
-import com.chongqing.domain.User;
-
 /**
  * @program: management
  * @author: 一树

@@ -6,15 +6,22 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Component
 public class House {
+    /**
+    * 主键
+    */
     private Long id;
 
+    /**
+    * 姓名
+    */
     private String name;
 
+    /**
+    * 备注
+    */
     private String info;
-
-
 }
