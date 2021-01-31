@@ -14,7 +14,14 @@
     <br>
     <form action="" method="post">
         <p>
-            账户<input type="text" name="" id="username" value="" />
+            账户<input type="text" name="" id="username" value="请输入用户名"
+                     onfocus="
+				    if(this.value == '请输入用户名')this.value=''
+				"
+                     onblur="
+					if(this.value == '')this.value = '请输入用户名'
+				"
+        />
         </p>
         <p>
             密码<input type="password" name="password" />
