@@ -1,47 +1,44 @@
 package com.chongqing.controller;
 
 import com.chongqing.service.LoginService;
-import com.chongqing.util.CrowdFundingConstant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @program: management
  * @author: 一树
  * @data: 2021/1/31 13:27
  */
-@RestController
-@RequestMapping("login")
+@Controller
+@RequestMapping
 public class LoginController {
 
-    @Autowired
+
     private LoginService loginService;
 
-
-    public LoginController() {
-        super();
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
     }
 
-    @RequestMapping("/admin/do/login")
-    public String doLogin(@RequestParam("loginAcct")String loginAcct,
-                          @RequestParam("userPswd")String userPswd,
-                          @RequestParam("type")String type,
-                          Model model,
-                          HttpSession session) {
-        loginService.login(loginAcct,userPswd,type);
+    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    @ResponseBody
+    public String doLogin(HttpServletRequest request,
+                          @RequestParam(value = "username", required = true) String username,
+                          @RequestParam(value = "password", required = true) String password) {
 
-//        if(admin==null){
-//            model.addAttribute(CrowdFundingConstant.ATTR_NAME_MESSAGE, CrowdFundingConstant.MESSAGE_LOGIN_FAILED);
-//            return "admin-login";
-//
-//        }
-//        session.setAttribute(CrowdFundingConstant.ATTR_NAME_LOGIN_ADMIN, admin);
-        return "redirect:/admin/to/main/page.html";
+        return loginService.login(username, password, null);
+    }
 
+    @Autowired
+    public void setLoginService(LoginService loginService) {
+        this.loginService = loginService;
     }
 }
