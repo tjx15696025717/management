@@ -1,6 +1,7 @@
 package com.chongqing.dao;
 
 import com.chongqing.domain.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long userId);
