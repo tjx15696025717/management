@@ -1,6 +1,10 @@
 package com.chongqing.service.impl;
 
+import com.chongqing.dao.AdminMapper;
+import com.chongqing.dao.ManagementMapper;
+import com.chongqing.dao.UserMapper;
 import com.chongqing.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,18 +13,18 @@ import org.springframework.stereotype.Service;
  * @data: 2021/1/31 13:29
  */
 @Service
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl<T> implements LoginService{
 
 
-//    @Autowired
-//    private AdminMapper adminMapper;
-//
-//    @Autowired
-//    private UserMapper userMapper;
-//
-//
-//    @Autowired
-//    private ManagementMapper managementMapper;
+    @Autowired
+    private AdminMapper adminMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
+
+    @Autowired
+    private ManagementMapper managementMapper;
 
 
 
@@ -34,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     @Override
-    public String login(String name,String password,String type) {
+    public T login(String name,String password,String type) {
         // TODO Auto-generated method stub
         //根据type查询数据库,判断哪种类型的登录
 //        if (null ==type) return null;
@@ -75,6 +79,8 @@ public class LoginServiceImpl implements LoginService {
         return null;
 
     }
+
+
 
 
 }
