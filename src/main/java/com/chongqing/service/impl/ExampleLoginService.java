@@ -1,9 +1,7 @@
 package com.chongqing.service.impl;
 
 import com.chongqing.dao.AdminMapper;
-import com.chongqing.dao.UserMapper;
 import com.chongqing.domain.Admin;
-import com.chongqing.domain.User;
 import com.chongqing.service.LoginService;
 import com.chongqing.util.CrowdFundingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +13,13 @@ import org.springframework.stereotype.Service;
  * @data: 2021/1/31 20:48
  */
 @Service
-public class DefaultLoginService implements LoginService {
+public class ExampleLoginService implements LoginService {
 
     private AdminMapper adminMapper;
 
 
     @Autowired
-    public DefaultLoginService(AdminMapper adminMapper) {
+    public ExampleLoginService(AdminMapper adminMapper) {
         this.adminMapper = adminMapper;
     }
 
