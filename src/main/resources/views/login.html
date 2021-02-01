@@ -7,27 +7,44 @@
 </head>
 <body>
 
+<div id="first_div">
 
-<div id="home_div" align="center">
-    <br>
-    <h1>登陆系统</h1>
-    <br>
-    <form action="/doLogin" method="post">
-        <p>
-            账户<input type="text" name="username" value="请输入用户名"
-                     onfocus="
-				    if(this.value === '请输入用户名')this.value=''
-				"
-                     onblur="
-					if(this.value === '')this.value = '请输入用户名'
-				"
-        />
-        </p>
-        <p>
-            密码<input type="password" name="password" />
-        </p>
-        <input type="submit"/>
-    </form>
+    <div id="home_div" align="center">
+        <br>
+        <h1>登陆系统</h1>
+        <br>
+        <form action="/doLogin" method="post">
+            <p>
+                账户<input type="text" name="username" value="请输入用户名" class="text0"
+                         onfocus="
+						if(this.value === '请输入用户名')this.value=''
+					"
+                         onblur="
+						if(this.value === '')this.value = '请输入用户名'
+					"
+            />
+            </p>
+            <p>
+                密码<input type="password" name="password" class="text0"/>
+            </p>
+
+            类型<select name="type" class="text0">
+            <option value="0">超级管理员</option>
+            <option value="1">楼栋管理员</option>
+            <option value="2">居民</option>
+        </select>
+            <br>
+            <br>
+            <input type="submit" class="button" value="登陆"/>
+        </form>
+
+        <br>
+        <form action="register" method="get">
+
+            <input type="submit" value="注册" class="button"/>
+        </form>
+
+    </div>
 
 </div>
 

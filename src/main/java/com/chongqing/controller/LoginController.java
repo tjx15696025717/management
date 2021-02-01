@@ -34,7 +34,13 @@ public class LoginController {
                           @RequestParam(value = "username", required = true) String username,
                           @RequestParam(value = "password", required = true) String password) {
 
-        return loginService.login(username, password, null);
+        return (String) loginService.login(username, password, null);
+    }
+
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register() {
+        return "register";
     }
 
     @Autowired

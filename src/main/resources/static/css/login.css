@@ -1,7 +1,27 @@
 #home_div{
-    height: 1000px;
+    height: 100%;
     width: 100%;
-    background-color: aquamarine;
     font-family: "arial black";
-    background-image: url("https://hbimg.huabanimg.com/3676869f726211be0a4ee48c172c67d90d5cf02fcd837-0AgZfo_fw658/format/webp");
+    background-image: url("https://hbimg.huabanimg.com/6e2af0015557ed84ae6616c08b3bb9e6bd515cc26e9d-DgJa9D_fw1200");
+    background-repeat: no-repeat;
+    background-size: 100%,100%;
+    margin: auto;
+}
+
+#first_div{
+    height: 800px;
+    width: 100%;
+}
+
+.text0{
+    margin-left: 0;
+    width: 150px;
+    height: 30px;
+}
+
+div form .button{
+    width: 150px;
+    height: 25px;
+    margin-top: 10px;
+    margin-left: 30px;
 }
