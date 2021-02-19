@@ -16,6 +16,10 @@ public class ResultEntity<T> {
     public static ResultEntity<String> successWithoutData() {
         return new ResultEntity<String>(SUCCESS, NO_MESSAGE, NO_DATA);
     }
+    public static ResultEntity<String> successWithMessage(String message) {
+        return new ResultEntity<String>(SUCCESS, message, NO_DATA);
+    }
+
     // 方便返回成功结果（不携带查询结果情况）
     public static ResultEntity<TableData> successWithTableData(List<String> tableHead,List tableData) {
         TableData<Object> date = new TableData<>();

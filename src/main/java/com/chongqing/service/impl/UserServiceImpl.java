@@ -2,7 +2,7 @@ package com.chongqing.service.impl;
 
 import com.chongqing.dao.UserMapper;
 import com.chongqing.domain.User;
-import com.chongqing.service.UserManagerService;
+import com.chongqing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by 小谭 on 2021/2/19.
  */
 @Service
-public class UserManagerSeviceImpl implements UserManagerService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;

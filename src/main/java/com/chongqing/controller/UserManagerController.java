@@ -3,15 +3,11 @@ package com.chongqing.controller;
 
 import com.chongqing.domain.User;
 import com.chongqing.service.LoginService;
-import com.chongqing.service.UserManagerService;
-import com.chongqing.util.CrowdFundingConstant;
+import com.chongqing.service.UserService;
 import com.chongqing.util.entiy.ResultEntity;
-import com.chongqing.util.entiy.TableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,10 +23,10 @@ public class UserManagerController {
     private LoginService loginService;
 
     @Autowired
-    private UserManagerService userManagerService;
+    private UserService userManagerService;
 
     @RequestMapping(value = "/update/user")
-    public ResultEntity InsertUser(@RequestBody User user) throws Exception {
+    public ResultEntity updateUser(@RequestBody User user) throws Exception {
         String meesage = userManagerService.UpdateUser(user);
         return new ResultEntity<String>(meesage,null,null);
     }
@@ -49,8 +45,7 @@ public class UserManagerController {
     @RequestMapping(value = "/select/user")
     public ResultEntity<List> selectUser(@RequestParam(value = "map",required = false)Map map) {
         try {
-            HashMap<Object, Object> maps = new HashMap<>();
-            List<User> users = userManagerService.selectByMap(maps);
+            List<User> users = userManagerService.selectByMap(map);
             return ResultEntity.successWithData(users);
         }catch (Exception e){
             e.printStackTrace();

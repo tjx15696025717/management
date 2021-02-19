@@ -19,7 +19,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    User selectByName();
+    User selectByName(String name);
 
     List<User> selectSelective(Map map);
 }

@@ -25,6 +25,33 @@
     from management
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from management
+    <where>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=BIGINT}
+      </if>
+      <if test="mobile != null">
+      AND  mobile like concat('%',#{mobile},'%')
+      </if>
+      <if test="name != null">
+      AND  `name` like concat('%',#{name},'%')
+      </if>
+      <if test="photo != null">
+      AND  photo like concat('%',#{photo},'%')
+      </if>
+      <if test="qq != null">
+      AND  qq like concat('%',#{qq},'%')
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=OTHER}
+      </if>
+    </where>
+  </select>
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select
@@ -51,7 +78,7 @@
     insert into management
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        id,
+        id =
       </if>
       <if test="houseId != null">
         house_id,

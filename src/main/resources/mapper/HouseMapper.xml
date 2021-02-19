@@ -6,11 +6,12 @@
     <!--@Table house-->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="VARCHAR" property="num" />
     <result column="info" jdbcType="LONGVARCHAR" property="info" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, `name`, info
+    id, `name`,num, info
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -19,6 +20,25 @@
     from house
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from house
+    <where>
+      <if test="id != null">
+        id = #{id},
+      </if>
+      <if test="name != null">
+      AND  `name` like concat('%',#{name},'%')
+      </if>
+      <if test="num != null">
+      AND num = #{num,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
     delete from house
@@ -26,9 +46,9 @@
   </delete>
   <insert id="insert" parameterType="com.chongqing.domain.House">
     <!--@mbg.generated-->
-    insert into house (id, `name`, info
+    insert into house (id, `name`,num, info
       )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{info,jdbcType=LONGVARCHAR}
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR},#{info,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.chongqing.domain.House">
@@ -41,6 +61,10 @@
       <if test="name != null">
         `name`,
       </if>
+      <if test="num != null">
+        num,
+      </if>
+
       <if test="info != null">
         info,
       </if>
@@ -51,6 +75,9 @@
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
       </if>
       <if test="info != null">
         #{info,jdbcType=LONGVARCHAR},
@@ -64,6 +91,9 @@
       <if test="name != null">
         `name` = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="num != null">
+        num = #{num,jdbcType=VARCHAR},
+      </if>
       <if test="info != null">
         info = #{info,jdbcType=LONGVARCHAR},
       </if>
@@ -74,6 +104,7 @@
     <!--@mbg.generated-->
     update house
     set `name` = #{name,jdbcType=VARCHAR},
+     num = #{num,jdbcType=VARCHAR},
       info = #{info,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

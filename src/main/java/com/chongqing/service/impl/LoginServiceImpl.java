@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
         //根据type查询数据库,判断哪种类型的登录
         if (null == type) return null;
         else if (type.equals("0")) {
-            User user = userMapper.selectByName();
+            User user = userMapper.selectByName(name);
             if (user == null) {
                 return CrowdFundingConstant.MESSAGE_LOGIN_FAILED;
             }
@@ -87,7 +87,7 @@ public class LoginServiceImpl implements LoginService {
     public String registered(String username, String password, String type) throws Exception {
         if (null == username || null == password) return "请输入账号或密码";
         else if (type.equals("0")) {
-            User user = userMapper.selectByName();
+            User user = userMapper.selectByName(username);
             if (user != null) {
                 return CrowdFundingConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE;
             }
@@ -95,7 +95,7 @@ public class LoginServiceImpl implements LoginService {
             User user1 = new User();
             user1.setName(username);
             user1.setPassword(password1);
-            int index = userMapper.insert(user);
+            int index = userMapper.insert(user1);
             if (index < 1) return "注册失败";
             return "注册成功";
 

@@ -5,7 +5,7 @@
     <!--@mbg.generated-->
     <!--@Table `user`-->
     <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <id column="name" jdbcType="VARCHAR" property="name" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="house_id" jdbcType="BIGINT" property="houseId" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -15,7 +15,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    user_id, house_id, mobile, `password`, photo, sex, qq
+    user_id,house_id, mobile, `password`, photo, sex, qq ,`name`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -30,25 +30,22 @@
     from `user`
     <where>
       <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=BIGINT}
       </if>
       <if test="houseId != null">
-        #{houseId,jdbcType=BIGINT},
+       AND house_id = #{houseId,jdbcType=BIGINT}
       </if>
       <if test="mobile != null">
-        #{mobile,jdbcType=VARCHAR},
+        AND  mobile like concat('%',#{mobile},'%')
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="name != null">
+        AND  `name` like concat('%',#{name},'%')
       </if>
       <if test="photo != null">
-        #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=OTHER},
+        AND  photo like concat('%',#{photo},'%')
       </if>
       <if test="qq != null">
-        #{qq,jdbcType=VARCHAR},
+      AND  qq like concat('%',#{qq},'%')
       </if>
     </where>
   </select>
@@ -57,7 +54,7 @@
     select
     <include refid="Base_Column_List" />
     from `user`
-    where name = #{name,jdbcType=VARCHAR}
+    where `name` = #{name,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
@@ -68,10 +65,10 @@
     <!--@mbg.generated-->
     insert into `user` (user_id, house_id, mobile, 
       `password`, photo, sex, 
-      qq)
+      qq,`name`)
     values (#{userId,jdbcType=BIGINT}, #{houseId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=OTHER}, 
-      #{qq,jdbcType=VARCHAR})
+      #{qq,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.chongqing.domain.User">
     <!--@mbg.generated-->
@@ -98,6 +95,9 @@
       <if test="qq != null">
         qq,
       </if>
+      <if test="name != null">
+        `name`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -120,6 +120,9 @@
       </if>
       <if test="qq != null">
         #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -145,6 +148,9 @@
       <if test="qq != null">
         qq = #{qq,jdbcType=VARCHAR},
       </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
@@ -156,7 +162,8 @@
       `password` = #{password,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=OTHER},
-      qq = #{qq,jdbcType=VARCHAR}
+      qq = #{qq,jdbcType=VARCHAR},
+     `name`  = #{name,jdbcType=VARCHAR},
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

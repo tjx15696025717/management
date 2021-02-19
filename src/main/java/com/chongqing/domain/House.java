@@ -21,6 +21,11 @@ public class House {
     private String name;
 
     /**
+    * 楼栋号
+    */
+    private String num;
+
+    /**
     * 备注
     */
     private String info;
