@@ -47,11 +47,11 @@ public class UserManagerController {
      * @return
      */
     @RequestMapping(value = "/select/user")
-    public ResultEntity<TableData> selectUser(@RequestParam(value = "map",required = false)Map map) {
+    public ResultEntity<List> selectUser(@RequestParam(value = "map",required = false)Map map) {
         try {
             HashMap<Object, Object> maps = new HashMap<>();
             List<User> users = userManagerService.selectByMap(maps);
-            return ResultEntity.successWithTableData(CrowdFundingConstant.userMessage,users);
+            return ResultEntity.successWithData(users);
         }catch (Exception e){
             e.printStackTrace();
             return ResultEntity.failed(e.getMessage());
