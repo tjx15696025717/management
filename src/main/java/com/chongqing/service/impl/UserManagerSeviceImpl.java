@@ -43,9 +43,6 @@ public class UserManagerSeviceImpl implements UserManagerService {
 
     @Override
     public List<User> selectByMap(Map map) {
-        if (null == map || map.isEmpty()){
-            return null;
-        }
         return this.userMapper.selectSelective(map);
     }
 }

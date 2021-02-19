@@ -1,5 +1,7 @@
 package com.chongqing.util.entiy;
 
+import java.util.List;
+
 /**
  * Created by 小谭 on 2021/2/1.
  */
@@ -14,6 +16,15 @@ public class ResultEntity<T> {
     public static ResultEntity<String> successWithoutData() {
         return new ResultEntity<String>(SUCCESS, NO_MESSAGE, NO_DATA);
     }
+    // 方便返回成功结果（不携带查询结果情况）
+    public static ResultEntity<TableData> successWithTableData(List<String> tableHead,List tableData) {
+        TableData<Object> date = new TableData<>();
+        date.setTableHead(tableHead);
+        date.setTableData(tableData);
+        return new ResultEntity<TableData>(SUCCESS, NO_MESSAGE, date);
+    }
+
+
 
     // 方便返回成功结果（携带查询结果情况）
     public static <E> ResultEntity<E> successWithData(E data) {
@@ -23,6 +34,10 @@ public class ResultEntity<T> {
     // 方便返回失败结果
     public static <E> ResultEntity<E> failed(E data, String message) {
         return new ResultEntity<E>(FAILED, message, data);
+    }
+
+    public static <E> ResultEntity<E> failed(String message) {
+        return new ResultEntity<E>(FAILED, message, null);
     }
 
     private String result;

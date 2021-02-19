@@ -20,7 +20,7 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
-    <include refid="Base_Column_List" />
+     *
     from `user`
     where user_id = #{userId,jdbcType=BIGINT}
   </select>

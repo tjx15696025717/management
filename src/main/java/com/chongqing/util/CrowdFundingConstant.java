@@ -1,6 +1,8 @@
 package com.chongqing.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,6 +11,18 @@ import java.util.Map;
 public class CrowdFundingConstant {
     public static final String ATTR_NAME_MESSAGE = "MESSAGE";
     public static final String ATTR_NAME_LOGIN_ADMIN = "LOGIN-ADMIN";
+    public static List<String> userMessage = new ArrayList<String>() {//这个大括号 就相当于我们  new 接口
+        {//这个大括号 就是 构造代码块 会在构造函数前 调用
+            this.add("userId");
+            this.add("houseId");
+            this.add("姓名");
+            this.add("电话");
+            this.add("密码");
+            this.add("照片");
+            this.add("性别");
+            this.add("QQ");
+        }
+    };
 
     public static final String MESSAGE_LOGIN_FAILED = "登录账号或密码不正确！请核对后再登录！";
     public static final String MESSAGE_CODE_INVALID = "明文不是有效字符串，请核对后再操作！";

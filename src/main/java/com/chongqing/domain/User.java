@@ -16,6 +16,10 @@ public class User {
     */
     private Long userId;
 
+    /**
+     * 电话
+     */
+    private String houseId;
 
     /**
     * 名字
@@ -26,6 +30,7 @@ public class User {
     * 电话
     */
     private String mobile;
+
 
     /**
     * 密码

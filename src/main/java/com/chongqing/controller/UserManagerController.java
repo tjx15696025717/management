@@ -1,13 +1,17 @@
 package com.chongqing.controller;
 
-import com.chongqing.domain.Management;
+
 import com.chongqing.domain.User;
 import com.chongqing.service.LoginService;
 import com.chongqing.service.UserManagerService;
+import com.chongqing.util.CrowdFundingConstant;
 import com.chongqing.util.entiy.ResultEntity;
+import com.chongqing.util.entiy.TableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,15 +47,14 @@ public class UserManagerController {
      * @return
      */
     @RequestMapping(value = "/select/user")
-    public ResultEntity selectUser(@RequestParam(value = "map")Map map) {
+    public ResultEntity<TableData> selectUser(@RequestParam(value = "map",required = false)Map map) {
         try {
-            List<User> users = userManagerService.selectByMap(map);
-            if (users.isEmpty()){
-                return new ResultEntity<String>("true","查询结果为空",null);
-            }
-            return new ResultEntity<List>("true","查询成功",users);
+            HashMap<Object, Object> maps = new HashMap<>();
+            List<User> users = userManagerService.selectByMap(maps);
+            return ResultEntity.successWithTableData(CrowdFundingConstant.userMessage,users);
         }catch (Exception e){
-            return ResultEntity.failed(e,"查询失败");
+            e.printStackTrace();
+            return ResultEntity.failed(e.getMessage());
         }
 
     }
