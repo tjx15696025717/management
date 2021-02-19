@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 public class Admin {
+    /**
+     * 系统管理者
+     */
     private Long id;
 
     private String name;

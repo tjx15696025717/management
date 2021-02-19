@@ -12,9 +12,11 @@ public class CrowdFundingConstant {
 
     public static final String MESSAGE_LOGIN_FAILED = "登录账号或密码不正确！请核对后再登录！";
     public static final String MESSAGE_CODE_INVALID = "明文不是有效字符串，请核对后再操作！";
+    public static final String IDENTUTY = "请选择登录的身份";
     public static final String MESSAGE_ACCESS_DENIED = "请登录后再操作";
     public static final String ATTR_NAME_PAGE_INFO="PAGE-INFO";
     public static final String MESSAGE_LOGIN_ACCT_ALREADY_IN_USE = "账号已被注册";
+
     public static final Map<String, String> EXCEPTION_MESSAGE_MAP = new HashMap<>();
 
     static {

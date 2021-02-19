@@ -10,15 +10,17 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 public class User {
+
     /**
-    * 主键
+    * 居民用户主键
     */
     private Long userId;
 
+
     /**
-    * 楼栋id
+    * 名字
     */
-    private Long houseId;
+    private String name;
 
     /**
     * 电话

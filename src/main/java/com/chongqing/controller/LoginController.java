@@ -1,26 +1,25 @@
 package com.chongqing.controller;
 
 import com.chongqing.service.LoginService;
+import com.chongqing.util.CrowdFundingConstant;
+import com.chongqing.util.entiy.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @program: management
  * @author: 一树
  * @data: 2021/1/31 13:27
  */
-@Controller
+@RestController
 @RequestMapping
 public class LoginController {
 
-
+    @Autowired
     private LoginService loginService;
 
     @RequestMapping("/login")
@@ -29,12 +28,32 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    @ResponseBody
-    public String doLogin(HttpServletRequest request,
-                          @RequestParam(value = "username", required = true) String username,
-                          @RequestParam(value = "password", required = true) String password) {
+    public Object doLogin(@RequestParam(value = "username", required = true) String username,
+                          @RequestParam(value = "password", required = true) String password,
+                          @RequestParam(value = "type", required = true) String type,
+                          HttpSession session) throws Exception {
+        Object object = loginService.login(username, password, type);
+        session.setAttribute(CrowdFundingConstant.ATTR_NAME_LOGIN_ADMIN, object);
+        return object;
+    }
 
-        return loginService.login(username, password, null);
+    @RequestMapping(value = "/registered")
+    public ResultEntity<String> doLogin(@RequestParam(value = "username", required = true) String username,
+                                @RequestParam(value = "password", required = true) String password,
+                                @RequestParam(value = "type", required = true) String type) throws Exception {
+        String message = loginService.registered(username, password, type);
+        if (!message.equals("注册成功"))
+            return ResultEntity.successWithoutData();
+        else
+            return ResultEntity.failed(message,message);
+    }
+
+    @RequestMapping("/admin/logout")
+    public String logout(HttpSession session) {
+
+        session.invalidate();
+
+        return "redirect:/index.html";
     }
 
     @Autowired

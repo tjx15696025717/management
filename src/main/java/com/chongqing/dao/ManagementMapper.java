@@ -14,4 +14,6 @@ public interface ManagementMapper {
     int updateByPrimaryKeySelective(Management record);
 
     int updateByPrimaryKey(Management record);
+
+    Management selectByName(String name);
 }

@@ -12,7 +12,8 @@
     <br>
     <h1>登陆系统</h1>
     <br>
-    <form action="http://127.0.0.1:8080/login" method="post">
+    <form action="/doLogin" method="post">
+
         <p>
             账户<input type="text" name="username" value="请输入用户名"
                      onfocus="
@@ -23,8 +24,12 @@
 				"
         />
         </p>
+
         <p>
             密码<input type="password" name="password" />
+        </p>
+        <p>
+            登录账户类型<input type="text" name="type" />
         </p>
         <input type="submit"/>
     </form>

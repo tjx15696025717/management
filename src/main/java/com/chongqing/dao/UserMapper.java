@@ -3,6 +3,9 @@ package com.chongqing.dao;
 import com.chongqing.domain.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Long userId);
 
@@ -15,4 +18,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByName();
+
+    List<User> selectSelective(Map map);
 }

@@ -33,11 +33,11 @@
     delete from `admin`
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.chongqing.domain.Admin">
+  <insert id="insert" parameterType="com.chongqing.domain.Admin" useGeneratedKeys ="true" keyProperty="id">
     <!--@mbg.generated-->
-    insert into `admin` (id, `name`, `password`, 
+    insert into `admin` (id,`name`, `password`,
       `status`)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{status,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.chongqing.domain.Admin">
