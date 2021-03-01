@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chongqing.dao.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.chongqing.domain.Activity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="BIGINT" />
+    <result column="activity_time" property="activityTime" jdbcType="TIMESTAMP" />
+    <result column="activity_long" property="activityLong" jdbcType="VARCHAR" />
+    <result column="activity_where" property="activityWhere" jdbcType="VARCHAR" />
+    <result column="all_person" property="allPerson" jdbcType="INTEGER" />
+    <result column="join_person" property="joinPerson" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.chongqing.domain.Activity" extends="BaseResultMap" >
+    <result column="message" property="message" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, activity_name, create_name, create_id, activity_time, activity_long, activity_where, all_person,
+    join_person, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    message
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.chongqing.domain.ActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chongqing.domain.ActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByActivityMap" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity
+    <where>
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR}
+      </if>
+      <if test="createName != null" >
+       AND create_name = #{createName,jdbcType=VARCHAR}
+      </if>
+      <if test="createId != null" >
+      AND  create_id = #{createId,jdbcType=BIGINT}
+      </if>
+      <if test="startTime !=null and endTime ! = null" >
+       AND <![CDATA[activity_time >= #{startTime} AND activity_time < #{endTime}]]>
+      </if>
+      <if test="activityLong != null" >
+       AND activity_long = #{activityLong,jdbcType=VARCHAR}
+      </if>
+      <if test="activityWhere != null" >
+      AND  activity_where = #{activityWhere,jdbcType=VARCHAR}
+      </if>
+      <if test="allPerson != null" >
+      AND  all_person = #{allPerson,jdbcType=INTEGER}
+      </if>
+      <if test="joinPerson != null" >
+      AND  join_person = #{joinPerson,jdbcType=INTEGER}
+      </if>
+      <if test="status != null" >
+      AND  status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="message != null" >
+      AND   message = #{message,jdbcType=LONGVARCHAR}
+      </if>
+    </where>
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chongqing.domain.ActivityExample" >
+    delete from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chongqing.domain.Activity" >
+    insert into activity (id, activity_name, create_name, 
+      create_id, activity_time, activity_long, 
+      activity_where, all_person, join_person,
+      status, message)
+    values (#{id,jdbcType=BIGINT}, #{activityName,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, 
+      #{createId,jdbcType=BIGINT}, #{activityTime,jdbcType=TIMESTAMP}, #{activityLong,jdbcType=VARCHAR}, 
+      #{activityWhere,jdbcType=VARCHAR}, #{allPerson,jdbcType=INTEGER}, #{joinPerson,jdbcType=INTEGER},
+      #{status,jdbcType=CHAR}, #{message,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chongqing.domain.Activity" >
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="activityTime != null" >
+        activity_time,
+      </if>
+      <if test="activityLong != null" >
+        activity_long,
+      </if>
+      <if test="activityWhere != null" >
+        activity_where,
+      </if>
+      <if test="allPerson != null" >
+        all_person,
+      </if>
+      <if test="joinPerson != null" >
+        join_person,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="activityTime != null" >
+        #{activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityLong != null" >
+        #{activityLong,jdbcType=VARCHAR},
+      </if>
+      <if test="activityWhere != null" >
+        #{activityWhere,jdbcType=VARCHAR},
+      </if>
+      <if test="allPerson != null" >
+        #{allPerson,jdbcType=INTEGER},
+      </if>
+      <if test="joinPerson != null" >
+        #{joinPerson,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chongqing.domain.ActivityExample" resultType="java.lang.Integer" >
+    select count(*) from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update activity
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.activityName != null" >
+        activity_name = #{record.activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createName != null" >
+        create_name = #{record.createName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createId != null" >
+        create_id = #{record.createId,jdbcType=BIGINT},
+      </if>
+      <if test="record.activityTime != null" >
+        activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activityLong != null" >
+        activity_long = #{record.activityLong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityWhere != null" >
+        activity_where = #{record.activityWhere,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allPerson != null" >
+        all_person = #{record.allPerson,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinPerson != null" >
+        join_person = #{record.joinPerson,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update activity
+    set id = #{record.id,jdbcType=BIGINT},
+      activity_name = #{record.activityName,jdbcType=VARCHAR},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      create_id = #{record.createId,jdbcType=BIGINT},
+      activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+      activity_long = #{record.activityLong,jdbcType=VARCHAR},
+    activity_where = #{record.activityWhere,jdbcType=VARCHAR},
+      all_person = #{record.allPerson,jdbcType=INTEGER},
+      join_person = #{record.joinPerson,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      message = #{record.message,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update activity
+    set id = #{record.id,jdbcType=BIGINT},
+      activity_name = #{record.activityName,jdbcType=VARCHAR},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      create_id = #{record.createId,jdbcType=BIGINT},
+      activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+      activity_long = #{record.activityLong,jdbcType=VARCHAR},
+    activity_where = #{record.activityWhere,jdbcType=VARCHAR},
+      all_person = #{record.allPerson,jdbcType=INTEGER},
+      join_person = #{record.joinPerson,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chongqing.domain.Activity" >
+    update activity
+    <set >
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="activityTime != null" >
+        activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityLong != null" >
+        activity_long = #{activityLong,jdbcType=VARCHAR},
+      </if>
+      <if test="activityWhere != null" >
+        activity_where = #{activityWhere,jdbcType=VARCHAR},
+      </if>
+      <if test="allPerson != null" >
+        all_person = #{allPerson,jdbcType=INTEGER},
+      </if>
+      <if test="joinPerson != null" >
+        join_person = #{joinPerson,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.chongqing.domain.Activity" >
+    update activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      activity_long = #{activityLong,jdbcType=VARCHAR},
+      activity_where = #{activityWhere,jdbcType=VARCHAR},
+      all_person = #{allPerson,jdbcType=INTEGER},
+      join_person = #{joinPerson,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      message = #{message,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chongqing.domain.Activity" >
+    update activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      activity_long = #{activityLong,jdbcType=VARCHAR},
+      activity_where = #{activityWhere,jdbcType=VARCHAR},
+      all_person = #{allPerson,jdbcType=INTEGER},
+      join_person = #{joinPerson,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

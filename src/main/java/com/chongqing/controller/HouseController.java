@@ -6,10 +6,7 @@ import com.chongqing.service.ManagerService;
 import com.chongqing.util.entiy.ResultEntity;
 import org.apache.catalina.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +16,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping
+@CrossOrigin
 public class HouseController {
 
     @Autowired
@@ -55,7 +53,7 @@ public class HouseController {
      * @return
      */
     @RequestMapping(value = "/select/house")
-    public ResultEntity<List> selectUser(@RequestBody(required = false)Map map) {
+    public ResultEntity<List> selectHouse(@RequestBody(required = false)Map map) {
         try {
             List<House> houses = houseService.selectByMap(map);
             return ResultEntity.successWithData(houses);

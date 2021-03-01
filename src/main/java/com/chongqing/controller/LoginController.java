@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping
+@CrossOrigin
 public class LoginController {
 
     @Autowired
@@ -27,7 +28,7 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/doLogin")
     public ResultEntity<Object> doLogin(@RequestParam(value = "username", required = true) String username,
                           @RequestParam(value = "password", required = true) String password,
                           @RequestParam(value = "type", required = true) String type,
