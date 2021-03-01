@@ -28,13 +28,13 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public Object doLogin(@RequestParam(value = "username", required = true) String username,
+    public ResultEntity<Object> doLogin(@RequestParam(value = "username", required = true) String username,
                           @RequestParam(value = "password", required = true) String password,
                           @RequestParam(value = "type", required = true) String type,
                           HttpSession session) throws Exception {
         Object object = loginService.login(username, password, type);
         session.setAttribute(CrowdFundingConstant.ATTR_NAME_LOGIN_ADMIN, object);
-        return object;
+        return ResultEntity.successWithData(object);
     }
 
     /**

@@ -55,7 +55,7 @@ public class HouseController {
      * @return
      */
     @RequestMapping(value = "/select/house")
-    public ResultEntity<List> selectUser(@RequestParam(value = "map",required = false)Map map) {
+    public ResultEntity<List> selectUser(@RequestBody(required = false)Map map) {
         try {
             List<House> houses = houseService.selectByMap(map);
             return ResultEntity.successWithData(houses);

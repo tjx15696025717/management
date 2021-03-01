@@ -1,5 +1,7 @@
 package com.chongqing.service;
 
+import com.chongqing.domain.PhysicalExamination;
+import com.chongqing.domain.Record;
 import com.chongqing.domain.User;
 import org.apache.catalina.Manager;
 
@@ -16,4 +18,18 @@ public interface UserService {
     String deleteUser(Long userId);
 
     List<User> selectByMap(Map map);
+
+    List<Record> selectRecordMap(Map map);
+
+    int UpdateRecord(Record record);
+
+    String insertRecod(Record record);
+
+    List<PhysicalExamination> selectPhysicalMap(Map map);
+
+    int UpdatePhysical(PhysicalExamination physicalExamination);
+
+    int insertPhysical(PhysicalExamination physicalExamination);
+
+    int deletePhysical(Long id);
 }

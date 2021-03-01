@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.chongqing.domain.Management">
     <!--@mbg.generated-->
     <!--@Table management-->
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="manager_id" jdbcType="BIGINT" property="managerId" />
     <result column="house_id" jdbcType="BIGINT" property="houseId" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -16,14 +16,14 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, house_id, mobile, `name`, `password`, photo, qq, sex, info
+    manager_id, house_id, mobile, `name`, `password`, photo, qq, sex, info
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from management
-    where id = #{id,jdbcType=BIGINT}
+    where manager_id = #{managerId,jdbcType=BIGINT}
   </select>
 
   <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
@@ -62,14 +62,14 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
     delete from management
-    where id = #{id,jdbcType=BIGINT}
+    where manager_id = #{managerId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.chongqing.domain.Management">
     <!--@mbg.generated-->
-    insert into management (id, house_id, mobile, 
+    insert into management (manager_id, house_id, mobile,
       `name`, `password`, photo, 
       qq, sex, info)
-    values (#{id,jdbcType=BIGINT}, #{houseId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, 
+    values (#{managerId,jdbcType=BIGINT}, #{houseId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR},
       #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
       #{qq,jdbcType=VARCHAR}, #{sex,jdbcType=OTHER}, #{info,jdbcType=VARCHAR})
   </insert>
@@ -77,8 +77,8 @@
     <!--@mbg.generated-->
     insert into management
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id =
+      <if test="managerId != null">
+        manager_id,
       </if>
       <if test="houseId != null">
         house_id,
@@ -106,8 +106,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
+      <if test="managerId != null">
+        #{managerId,jdbcType=BIGINT},
       </if>
       <if test="houseId != null">
         #{houseId,jdbcType=BIGINT},
@@ -164,7 +164,7 @@
         info = #{info,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where manager_id = #{managerId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.chongqing.domain.Management">
     <!--@mbg.generated-->
@@ -177,6 +177,6 @@
       qq = #{qq,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=OTHER},
       info = #{info,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    where manager_id = #{managerId,jdbcType=BIGINT}
   </update>
 </mapper>

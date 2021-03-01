@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chongqing.dao.RecordMapper" >
+  <resultMap id="BaseResultMap" type="com.chongqing.domain.Record" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="record_time" property="recordTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="temp" property="temp" jdbcType="VARCHAR" />
+    <result column="case1" property="case1" jdbcType="CHAR" />
+    <result column="case2" property="case2" jdbcType="CHAR" />
+    <result column="case3" property="case3" jdbcType="CHAR" />
+    <result column="case4" property="case4" jdbcType="CHAR" />
+    <result column="case5" property="case5" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.chongqing.domain.Record" extends="BaseResultMap" >
+    <result column="info" property="info" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, pid, record_time, remark, status, temp, case1, case2, case3, case4, case5
+  </sql>
+  <sql id="Blob_Column_List" >
+    info
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.chongqing.domain.RecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chongqing.domain.RecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+      *
+    from record
+    <where>
+      <if test="name != null" >
+       `name` like concat('%',#{name},'%')
+      </if>
+      <if test="pid != null" >
+      AND  pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="recordTime != null" >
+      AND  record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime !=null and endTime ! = null" >
+        <![CDATA[create_time >= #{startTime} AND create_time < #{endTime}]]>
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="temp != null" >
+        temp = #{temp,jdbcType=VARCHAR},
+      </if>
+      <if test="case1 != null" >
+        case1 = #{case1,jdbcType=CHAR},
+      </if>
+      <if test="case2 != null" >
+        case2 = #{case2,jdbcType=CHAR},
+      </if>
+      <if test="case3 != null" >
+        case3 = #{case3,jdbcType=CHAR},
+      </if>
+      <if test="case4 != null" >
+        case4 = #{case4,jdbcType=CHAR},
+      </if>
+      <if test="case5 != null" >
+        case5 = #{case5,jdbcType=CHAR},
+      </if>
+
+    </where>
+
+  </select>
+
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chongqing.domain.RecordExample" >
+    delete from record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chongqing.domain.Record" >
+    insert into record (id, name, pid, 
+      record_time, remark, status, 
+      temp, case1, case2, case3, 
+      case4, case5, info)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, 
+      #{recordTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{temp,jdbcType=VARCHAR}, #{case1,jdbcType=CHAR}, #{case2,jdbcType=CHAR}, #{case3,jdbcType=CHAR}, 
+      #{case4,jdbcType=CHAR}, #{case5,jdbcType=CHAR}, #{info,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chongqing.domain.Record" >
+    insert into record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="recordTime != null" >
+        record_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="temp != null" >
+        temp,
+      </if>
+      <if test="case1 != null" >
+        case1,
+      </if>
+      <if test="case2 != null" >
+        case2,
+      </if>
+      <if test="case3 != null" >
+        case3,
+      </if>
+      <if test="case4 != null" >
+        case4,
+      </if>
+      <if test="case5 != null" >
+        case5,
+      </if>
+      <if test="info != null" >
+        info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="recordTime != null" >
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="temp != null" >
+        #{temp,jdbcType=VARCHAR},
+      </if>
+      <if test="case1 != null" >
+        #{case1,jdbcType=CHAR},
+      </if>
+      <if test="case2 != null" >
+        #{case2,jdbcType=CHAR},
+      </if>
+      <if test="case3 != null" >
+        #{case3,jdbcType=CHAR},
+      </if>
+      <if test="case4 != null" >
+        #{case4,jdbcType=CHAR},
+      </if>
+      <if test="case5 != null" >
+        #{case5,jdbcType=CHAR},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chongqing.domain.RecordExample" resultType="java.lang.Integer" >
+    select count(*) from record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordTime != null" >
+        record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.temp != null" >
+        temp = #{record.temp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.case1 != null" >
+        case1 = #{record.case1,jdbcType=CHAR},
+      </if>
+      <if test="record.case2 != null" >
+        case2 = #{record.case2,jdbcType=CHAR},
+      </if>
+      <if test="record.case3 != null" >
+        case3 = #{record.case3,jdbcType=CHAR},
+      </if>
+      <if test="record.case4 != null" >
+        case4 = #{record.case4,jdbcType=CHAR},
+      </if>
+      <if test="record.case5 != null" >
+        case5 = #{record.case5,jdbcType=CHAR},
+      </if>
+      <if test="record.info != null" >
+        info = #{record.info,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update record
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=BIGINT},
+      record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      temp = #{record.temp,jdbcType=VARCHAR},
+      case1 = #{record.case1,jdbcType=CHAR},
+      case2 = #{record.case2,jdbcType=CHAR},
+      case3 = #{record.case3,jdbcType=CHAR},
+      case4 = #{record.case4,jdbcType=CHAR},
+      case5 = #{record.case5,jdbcType=CHAR},
+      info = #{record.info,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update record
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=BIGINT},
+      record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      temp = #{record.temp,jdbcType=VARCHAR},
+      case1 = #{record.case1,jdbcType=CHAR},
+      case2 = #{record.case2,jdbcType=CHAR},
+      case3 = #{record.case3,jdbcType=CHAR},
+      case4 = #{record.case4,jdbcType=CHAR},
+      case5 = #{record.case5,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chongqing.domain.Record" >
+    update record
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="recordTime != null" >
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="temp != null" >
+        temp = #{temp,jdbcType=VARCHAR},
+      </if>
+      <if test="case1 != null" >
+        case1 = #{case1,jdbcType=CHAR},
+      </if>
+      <if test="case2 != null" >
+        case2 = #{case2,jdbcType=CHAR},
+      </if>
+      <if test="case3 != null" >
+        case3 = #{case3,jdbcType=CHAR},
+      </if>
+      <if test="case4 != null" >
+        case4 = #{case4,jdbcType=CHAR},
+      </if>
+      <if test="case5 != null" >
+        case5 = #{case5,jdbcType=CHAR},
+      </if>
+      <if test="info != null" >
+        info = #{info,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.chongqing.domain.Record" >
+    update record
+    set name = #{name,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      record_time = #{recordTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      temp = #{temp,jdbcType=VARCHAR},
+      case1 = #{case1,jdbcType=CHAR},
+      case2 = #{case2,jdbcType=CHAR},
+      case3 = #{case3,jdbcType=CHAR},
+      case4 = #{case4,jdbcType=CHAR},
+      case5 = #{case5,jdbcType=CHAR},
+      info = #{info,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chongqing.domain.Record" >
+    update record
+    set name = #{name,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      record_time = #{recordTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      temp = #{temp,jdbcType=VARCHAR},
+      case1 = #{case1,jdbcType=CHAR},
+      case2 = #{case2,jdbcType=CHAR},
+      case3 = #{case3,jdbcType=CHAR},
+      case4 = #{case4,jdbcType=CHAR},
+      case5 = #{case5,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

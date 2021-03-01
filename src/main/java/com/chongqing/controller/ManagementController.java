@@ -1,8 +1,10 @@
 package com.chongqing.controller;
 
 import com.chongqing.domain.Management;
+import com.chongqing.domain.News;
 import com.chongqing.service.ManagerService;
 
+import com.chongqing.util.CrowdMessage;
 import com.chongqing.util.entiy.ResultEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class ManagementController {
      * @return
      */
     @RequestMapping(value = "/select/Manager")
-    public ResultEntity<List> selectManager(@RequestParam(value = "map",required = false)Map map) {
+    public ResultEntity<List> selectManager(@RequestBody(required = false)Map map) {
         try {
             List<Management> managers = ManagerService.selectByMap(map);
             return ResultEntity.successWithData(managers);
@@ -59,4 +61,50 @@ public class ManagementController {
         }
 
     }
+
+
+
+
+    /**
+     * 新闻发布功能，管理源可以发布以及编辑新闻
+     */
+    @RequestMapping(value = "/insert/News")
+    public ResultEntity<String> InsertNews(@RequestBody News news) throws Exception {
+        Integer index = ManagerService.insertNews(news);
+        String message = CrowdMessage.resultMessage(index, "insert");
+        return ResultEntity.successWithMessage(message);
+    }
+
+
+    @RequestMapping(value = "/update/News")
+    public ResultEntity updateNews(@RequestBody News news) throws Exception {
+        Integer index = ManagerService.updateNews(news);
+        String message = CrowdMessage.resultMessage(index, "update");
+        return ResultEntity.successWithMessage(message);
+    }
+
+    @RequestMapping(value = "/delete/News")
+    public ResultEntity deleteNews(@RequestParam("NewsId") Long NewsId) throws Exception {
+        Integer index = ManagerService.deleteNews(NewsId);
+        String message = CrowdMessage.resultMessage(index, "delete");
+        return ResultEntity.successWithMessage(message);
+    }
+
+    /**
+     * 筛选查询
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/select/News")
+    public ResultEntity<List> selectNews(@RequestBody(required = false)Map map) {
+        try {
+            List<News> managers = ManagerService.selectByNewsMap(map);
+            return ResultEntity.successWithData(managers);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultEntity.failed(e.getMessage());
+        }
+
+    }
+
 }

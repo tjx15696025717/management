@@ -13,7 +13,7 @@ public class Management {
     /**
     * 楼栋管理员主键
     */
-    private Long id;
+    private Long managerId;
 
     /**
     * 楼栋id

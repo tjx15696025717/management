@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chongqing.dao.PhysicalExaminationMapper" >
+  <resultMap id="BaseResultMap" type="com.chongqing.domain.PhysicalExamination" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="diastolic_pressure" property="diastolicPressure" jdbcType="VARCHAR" />
+    <result column="systolic_pressure" property="systolicPressure" jdbcType="VARCHAR" />
+    <result column="body_weight" property="bodyWeight" jdbcType="VARCHAR" />
+    <result column="waist_hip" property="waistHip" jdbcType="VARCHAR" />
+    <result column="urea" property="urea" jdbcType="VARCHAR" />
+    <result column="uric_acid" property="uricAcid" jdbcType="VARCHAR" />
+    <result column="glycerol glycol" property="glycerolGlycol" jdbcType="VARCHAR" />
+    <result column="cholesterol" property="cholesterol" jdbcType="VARCHAR" />
+    <result column="glucose" property="glucose" jdbcType="VARCHAR" />
+    <result column="protein" property="protein" jdbcType="VARCHAR" />
+    <result column="metrics" property="metrics" jdbcType="VARCHAR" />
+    <result column="record_time" property="recordTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pid, name, diastolic_pressure, systolic_pressure, body_weight, waist_hip, urea, 
+    uric_acid, "glycerol glycol", cholesterol, glucose, protein, metrics, record_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chongqing.domain.PhysicalExaminationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from physical_examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from physical_examination
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByMap" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from physical_examination
+    <where>
+      <if test="id != null" >
+        id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="pid != null" >
+      AND  pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="name != null" >
+      AND  name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="diastolicPressure != null" >
+      AND  diastolic_pressure = #{diastolicPressure,jdbcType=VARCHAR}
+      </if>
+      <if test="systolicPressure != null" >
+      AND  systolic_pressure = #{systolicPressure,jdbcType=VARCHAR}
+      </if>
+      <if test="bodyWeight != null" >
+        AND body_weight = #{bodyWeight,jdbcType=VARCHAR}
+      </if>
+      <if test="waistHip != null" >
+        AND waist_hip = #{waistHip,jdbcType=VARCHAR}
+      </if>
+      <if test="urea != null" >
+        AND urea = #{urea,jdbcType=VARCHAR}
+      </if>
+      <if test="uricAcid != null" >
+        AND uric_acid = #{uricAcid,jdbcType=VARCHAR}
+      </if>
+      <if test="glycerolGlycol != null" >
+        AND "glycerol glycol" = #{glycerolGlycol,jdbcType=VARCHAR}
+      </if>
+      <if test="cholesterol != null" >
+        AND cholesterol = #{cholesterol,jdbcType=VARCHAR}
+      </if>
+      <if test="glucose != null" >
+        AND glucose = #{glucose,jdbcType=VARCHAR}
+      </if>
+      <if test="protein != null" >
+        AND protein = #{protein,jdbcType=VARCHAR}
+      </if>
+      <if test="metrics != null" >
+        AND metrics = #{metrics,jdbcType=VARCHAR}
+      </if>
+      <if test="recordTime != null" >
+        AND record_time = #{recordTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="startTime !=null and endTime ! = null" >
+        AND <![CDATA[record_time >= #{startTime} AND record_time < #{endTime}]]>
+      </if>
+    </where>
+
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from physical_examination
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chongqing.domain.PhysicalExaminationExample" >
+    delete from physical_examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chongqing.domain.PhysicalExamination" >
+    insert into physical_examination (id, pid, name, 
+      diastolic_pressure, systolic_pressure, body_weight, 
+      waist_hip, urea, uric_acid, 
+      "glycerol glycol", cholesterol, glucose, 
+      protein, metrics, record_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{diastolicPressure,jdbcType=VARCHAR}, #{systolicPressure,jdbcType=VARCHAR}, #{bodyWeight,jdbcType=VARCHAR}, 
+      #{waistHip,jdbcType=VARCHAR}, #{urea,jdbcType=VARCHAR}, #{uricAcid,jdbcType=VARCHAR}, 
+      #{glycerolGlycol,jdbcType=VARCHAR}, #{cholesterol,jdbcType=VARCHAR}, #{glucose,jdbcType=VARCHAR}, 
+      #{protein,jdbcType=VARCHAR}, #{metrics,jdbcType=VARCHAR}, #{recordTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chongqing.domain.PhysicalExamination" >
+    insert into physical_examination
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="diastolicPressure != null" >
+        diastolic_pressure,
+      </if>
+      <if test="systolicPressure != null" >
+        systolic_pressure,
+      </if>
+      <if test="bodyWeight != null" >
+        body_weight,
+      </if>
+      <if test="waistHip != null" >
+        waist_hip,
+      </if>
+      <if test="urea != null" >
+        urea,
+      </if>
+      <if test="uricAcid != null" >
+        uric_acid,
+      </if>
+      <if test="glycerolGlycol != null" >
+        "glycerol glycol",
+      </if>
+      <if test="cholesterol != null" >
+        cholesterol,
+      </if>
+      <if test="glucose != null" >
+        glucose,
+      </if>
+      <if test="protein != null" >
+        protein,
+      </if>
+      <if test="metrics != null" >
+        metrics,
+      </if>
+      <if test="recordTime != null" >
+        record_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="diastolicPressure != null" >
+        #{diastolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="systolicPressure != null" >
+        #{systolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyWeight != null" >
+        #{bodyWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="waistHip != null" >
+        #{waistHip,jdbcType=VARCHAR},
+      </if>
+      <if test="urea != null" >
+        #{urea,jdbcType=VARCHAR},
+      </if>
+      <if test="uricAcid != null" >
+        #{uricAcid,jdbcType=VARCHAR},
+      </if>
+      <if test="glycerolGlycol != null" >
+        #{glycerolGlycol,jdbcType=VARCHAR},
+      </if>
+      <if test="cholesterol != null" >
+        #{cholesterol,jdbcType=VARCHAR},
+      </if>
+      <if test="glucose != null" >
+        #{glucose,jdbcType=VARCHAR},
+      </if>
+      <if test="protein != null" >
+        #{protein,jdbcType=VARCHAR},
+      </if>
+      <if test="metrics != null" >
+        #{metrics,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null" >
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chongqing.domain.PhysicalExaminationExample" resultType="java.lang.Integer" >
+    select count(*) from physical_examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update physical_examination
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diastolicPressure != null" >
+        diastolic_pressure = #{record.diastolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systolicPressure != null" >
+        systolic_pressure = #{record.systolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bodyWeight != null" >
+        body_weight = #{record.bodyWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waistHip != null" >
+        waist_hip = #{record.waistHip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urea != null" >
+        urea = #{record.urea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uricAcid != null" >
+        uric_acid = #{record.uricAcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.glycerolGlycol != null" >
+        "glycerol glycol" = #{record.glycerolGlycol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cholesterol != null" >
+        cholesterol = #{record.cholesterol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.glucose != null" >
+        glucose = #{record.glucose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protein != null" >
+        protein = #{record.protein,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metrics != null" >
+        metrics = #{record.metrics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordTime != null" >
+        record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update physical_examination
+    set id = #{record.id,jdbcType=BIGINT},
+      pid = #{record.pid,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      diastolic_pressure = #{record.diastolicPressure,jdbcType=VARCHAR},
+      systolic_pressure = #{record.systolicPressure,jdbcType=VARCHAR},
+      body_weight = #{record.bodyWeight,jdbcType=VARCHAR},
+      waist_hip = #{record.waistHip,jdbcType=VARCHAR},
+      urea = #{record.urea,jdbcType=VARCHAR},
+      uric_acid = #{record.uricAcid,jdbcType=VARCHAR},
+      "glycerol glycol" = #{record.glycerolGlycol,jdbcType=VARCHAR},
+      cholesterol = #{record.cholesterol,jdbcType=VARCHAR},
+      glucose = #{record.glucose,jdbcType=VARCHAR},
+      protein = #{record.protein,jdbcType=VARCHAR},
+      metrics = #{record.metrics,jdbcType=VARCHAR},
+      record_time = #{record.recordTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chongqing.domain.PhysicalExamination" >
+    update physical_examination
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="diastolicPressure != null" >
+        diastolic_pressure = #{diastolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="systolicPressure != null" >
+        systolic_pressure = #{systolicPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyWeight != null" >
+        body_weight = #{bodyWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="waistHip != null" >
+        waist_hip = #{waistHip,jdbcType=VARCHAR},
+      </if>
+      <if test="urea != null" >
+        urea = #{urea,jdbcType=VARCHAR},
+      </if>
+      <if test="uricAcid != null" >
+        uric_acid = #{uricAcid,jdbcType=VARCHAR},
+      </if>
+      <if test="glycerolGlycol != null" >
+        "glycerol glycol" = #{glycerolGlycol,jdbcType=VARCHAR},
+      </if>
+      <if test="cholesterol != null" >
+        cholesterol = #{cholesterol,jdbcType=VARCHAR},
+      </if>
+      <if test="glucose != null" >
+        glucose = #{glucose,jdbcType=VARCHAR},
+      </if>
+      <if test="protein != null" >
+        protein = #{protein,jdbcType=VARCHAR},
+      </if>
+      <if test="metrics != null" >
+        metrics = #{metrics,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null" >
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chongqing.domain.PhysicalExamination" >
+    update physical_examination
+    set pid = #{pid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      diastolic_pressure = #{diastolicPressure,jdbcType=VARCHAR},
+      systolic_pressure = #{systolicPressure,jdbcType=VARCHAR},
+      body_weight = #{bodyWeight,jdbcType=VARCHAR},
+      waist_hip = #{waistHip,jdbcType=VARCHAR},
+      urea = #{urea,jdbcType=VARCHAR},
+      uric_acid = #{uricAcid,jdbcType=VARCHAR},
+      "glycerol glycol" = #{glycerolGlycol,jdbcType=VARCHAR},
+      cholesterol = #{cholesterol,jdbcType=VARCHAR},
+      glucose = #{glucose,jdbcType=VARCHAR},
+      protein = #{protein,jdbcType=VARCHAR},
+      metrics = #{metrics,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
